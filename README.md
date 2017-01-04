@@ -5,7 +5,7 @@ Vagrant project to install MS SQL Server vNext CTP 1.1 on Linux Ubuntu 16.04
 ## Requirements
 
 * You need to have [Vagrant](http://www.vagrantup.com/) installed;
-* You need to have [VitualBox](https://www.virtualbox.org/) installed;
+* You need to have [VirtualBox](https://www.virtualbox.org/) installed;
 * The host machine needs at least 6 GB of RAM, because SQL Server installation claims 4 GB of RAM;
 * As SQL Server vNext is only available for 64-bit machines at the moment, the host machine needs to have a 64-bit architecture;
 * You may need to [enable virtualization](http://www.sysprobs.com/disable-enable-virtualization-technology-bios) manually.

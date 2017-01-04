@@ -3,16 +3,10 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  # All Vagrant configuration is done here. The most common configuration
-  # options are documented and commented below. For a complete reference,
-  # please see the online documentation at vagrantup.com.
 
   config.vm.box = "ubuntu/xenial64"
 
-  # share this project under /home/vagrant/vagrant-ubuntu-oracle-xe
-  config.vm.synced_folder ".", "/home/vagrant/vagrant-ubuntu-oracle-xe", :mount_options => ["dmode=777","fmode=666"]
-
-  # Forward Oracle port
+  # Forward SQL Sever port
   config.vm.network :forwarded_port, guest: 1433, host: 1433
 
   # Provider-specific configuration so you can fine-tune various backing
@@ -45,6 +39,6 @@ SCRIPT
   config.vm.provision :shell, :inline => $locale_and_charset_conf
 
   # Installs Microsoft SQL Server vNext
-  config.vm.provision "shell", path: "bootstrap.sh"
+  config.vm.provision "shell", path: "bootstrap.sh", privileged: false
 
 end

@@ -3,11 +3,11 @@
 set -e # Exit script immediately on first error.
 set -x # Print commands and their arguments as they are executed.
 
-# Check if Portalcm environment is already installed
+# Check if SQL Server environment is already installed
 RUN_ONCE_FLAG=~/.mssqlserver_env_build_time
 
 if [ -e "$RUN_ONCE_FLAG" ]; then
-  echo "Portalcm environment is already installed."
+  echo "SQL Server environment is already installed."
   exit 0
 fi
 

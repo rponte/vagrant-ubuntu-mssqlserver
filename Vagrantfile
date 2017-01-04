@@ -44,4 +44,7 @@ Vagrant.configure("2") do |config|
 SCRIPT
   config.vm.provision :shell, :inline => $locale_and_charset_conf
 
+  # Installs Microsoft SQL Server vNext
+  config.vm.provision "shell", path: "bootstrap.sh"
+
 end

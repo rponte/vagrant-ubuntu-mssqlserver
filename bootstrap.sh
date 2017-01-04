@@ -1,24 +1,16 @@
 #!/bin/bash
 
-Skip to content
- 
- 
-Search…
-All gists
-GitHub
-New gist @rponte
- Edit
-  Delete
-  Star 0
-  @rponterponte/install-mssqlserver-vnext-ubuntu.sh
-Last active 3 hours ago
-Embed  
-<script src="https://gist.github.com/rponte/0b1e61a4597446a5d0300eb882cc345a.js"></script>
-  Download ZIP
- Code  Revisions 3
-Script to install MS SQL Server vNext on Linux Ubuntu 16.04 x64
-Raw
- install-mssqlserver-vnext-ubuntu.sh
+set -e # Exit script immediately on first error.
+set -x # Print commands and their arguments as they are executed.
+
+# Check if Portalcm environment is already installed
+RUN_ONCE_FLAG=~/.mssqlserver_env_build_time
+
+if [ -e "$RUN_ONCE_FLAG" ]; then
+  echo "Portalcm environment is already installed."
+  exit 0
+fi
+
 ##
 # Sqlserver tools - https://docs.microsoft.com/en-us/sql/linux/sql-server-linux-setup-ubuntu
 ##
@@ -46,6 +38,16 @@ curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
 curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
 
 # 6. installs package
-#sudo apt-get update -y
-#sudo apt-get install mssql-tools -y
+sudo apt-get update -y
+# I couldnt figure out how to configure non-interactive mode yet
+#sudo apt-get install mssql-tools -y 
 
+# Cleaning unneeded packages
+sudo apt-get autoremove -y
+sudo apt-get clean
+
+# Configures prompt color
+sed -i 's/#force_color_prompt=yes/force_color_prompt=yes/g' ~/.bashrc
+
+# sets "run once" flag
+date > $RUN_ONCE_FLAG
